@@ -20,8 +20,8 @@ module MobileFu
       initializer "mobile-fu.action_view" do |app|
         ActiveSupport.on_load :action_view do
           include MobileFu::Helper
-          alias_method :stylesheet_link_tag_without_mobilization, :mobilization
-          alias_method :mobilization, :stylesheet_link_tag_with_mobilization
+          alias_method :stylesheet_link_tag_without_mobilization, :stylesheet_link_tag
+          alias_method :stylesheet_link_tag, :stylesheet_link_tag_with_mobilization
         end
       end
     end
@@ -198,6 +198,6 @@ end
 if Rails::VERSION::MAJOR < 3
   ActionController::Base.send :include, ActionController::MobileFu
   ActionView::Base.send :include, MobileFu::Helper
-  ActionView::Base.send :alias_method, :stylesheet_link_tag_without_mobilization, :mobilization
-  ActionView::Base.send :alias_method, :mobilization, :stylesheet_link_tag_with_mobilization
+  ActionView::Base.send :alias_method, :stylesheet_link_tag_without_mobilization, :stylesheet_link_tag
+  ActionView::Base.send :alias_method, :stylesheet_link_tag, :stylesheet_link_tag_with_mobilization
 end
