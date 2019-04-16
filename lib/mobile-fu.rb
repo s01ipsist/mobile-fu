@@ -16,14 +16,6 @@ module MobileFu
           include ActionController::MobileFu
         end
       end
-
-      initializer "mobile-fu.action_view" do |app|
-        ActiveSupport.on_load :action_view do
-          include MobileFu::Helper
-          alias_method :stylesheet_link_tag_without_mobilization, :stylesheet_link_tag
-          alias_method :stylesheet_link_tag, :stylesheet_link_tag_with_mobilization
-        end
-      end
     end
 
     Mime::Type.register_alias "text/html", :mobile
